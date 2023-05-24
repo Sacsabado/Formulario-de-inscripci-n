@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario</title>
+    <style>
+        h1{
+            color:black; whidth 100%; font-size: 200%;text-align:center
+        }
+        h3 {
+            color: black;
+            font-family: sans-serif;
+            
+        }
+    </style>
+</head>
+
+<body style="background-color: rgb(102, 172, 205);">
+    <form action="http://192.168.0.80/bti-7/index.php" method="post" >
+    <h1 >
+        Formulario
+    </h1>
+    <h3>
+        <fieldset>
+            <legend>Datos Personales</legend>
+            <div>
+                <label> Nombre:</label>
+                <input type="text" ; name="Nombre">
+            </div>
+           
+            <label> Apellido:</label>
+            <input type="text" ; name="Apellido">
+            <div>
+                <div>
+                    <label> Nacionalidad:</label>
+               <input type="text" ; name="Nacionalidad">
+               </div>
+                <div>
+                <label> Fecha de nacimiento:</label>
+            <input type="date" name="Fecha de nacimiento">
+        </div>
+        <div>
+                <label> Direccion:</label>
+            <input type="text" ; name="Direccion">
+        </div>
+            
+            <div>
+                 <label> Telefono:</label>
+            <input type="text" ; name="Telefono">
+            </div>
+           <div>
+                <label> Sexo:</label>
+            <select id="Sexo" ; name="Sexo">
+                <option value="Ópciones"> Opciones</option>
+                <option value="Hombre"> Hombre</option>
+                <option value="Mujer"> Mujer</option>
+            </select>
+            <div>
+                <label> Estado Civil</label>
+            <select id="Estado" ; name="Estado">
+                <option value="Ópciones"> Opciones</option>
+                <option value="Casado/a"> Casado/a</option>
+                <option value="Soltero/a"> Soltero/a</option>
+                <option value="Divorciado/a"> Divorciado/a</option>
+                </select>
+             </div>
+        </div>
+            
+            
+        </fieldset>
+    </h3>
+    <input type="hidden"  >
+    <input type="submit" value="Enviar" id="Enviar">
+   
+
+</form>
+
+</body>  
+
+</html>
