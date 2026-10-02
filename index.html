@@ -3,81 +3,866 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulario</title>
+
+    <title>Formulario de Inscripción</title>
+
     <style>
-        h1{
-            color:black; whidth 100%; font-size: 200%;text-align:center
+
+        /* =========================
+           GENERAL
+        ========================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        h3 {
-            color: black;
-            font-family: sans-serif;
-            
+
+        :root {
+            --primary: #1769e0;
+            --primary-dark: #0d4fb3;
+            --background: #f4f7fb;
+            --card: #ffffff;
+            --text: #172033;
+            --muted: #6f7787;
+            --border: #dce2eb;
+            --success: #18a66a;
         }
+
+        body {
+            min-height: 100vh;
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #eef4ff 0%,
+                    #f8fafc 45%,
+                    #edf5ff 100%
+                );
+
+            color: var(--text);
+        }
+
+
+        /* =========================
+           HEADER
+        ========================== */
+
+        .topbar {
+            width: 100%;
+
+            padding: 24px 7%;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            background: rgba(255, 255, 255, 0.85);
+
+            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+
+            backdrop-filter: blur(15px);
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        .brand-icon {
+            width: 38px;
+            height: 38px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 10px;
+
+            background: var(--primary);
+            color: white;
+
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .step {
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+
+        /* =========================
+           PAGE
+        ========================== */
+
+        .page {
+            width: 100%;
+
+            padding: 60px 20px 80px;
+
+            display: flex;
+            justify-content: center;
+        }
+
+        .form-container {
+            width: 100%;
+            max-width: 950px;
+        }
+
+
+        /* =========================
+           INTRO
+        ========================== */
+
+        .intro {
+            margin-bottom: 30px;
+        }
+
+        .intro-badge {
+            display: inline-block;
+
+            padding: 7px 12px;
+
+            margin-bottom: 14px;
+
+            border-radius: 20px;
+
+            background: #e7f0ff;
+
+            color: var(--primary);
+
+            font-size: 12px;
+            font-weight: 700;
+
+            letter-spacing: 1px;
+        }
+
+        .intro h1 {
+            font-size: clamp(34px, 5vw, 52px);
+
+            letter-spacing: -1.5px;
+
+            margin-bottom: 12px;
+        }
+
+        .intro p {
+            max-width: 650px;
+
+            color: var(--muted);
+
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+
+        /* =========================
+           CARD
+        ========================== */
+
+        .form-card {
+            background: var(--card);
+
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            border-radius: 22px;
+
+            box-shadow:
+                0 20px 60px rgba(24, 48, 90, 0.09);
+
+            overflow: hidden;
+        }
+
+
+        /* =========================
+           CARD HEADER
+        ========================== */
+
+        .card-header {
+            padding: 30px 35px 25px;
+
+            border-bottom: 1px solid var(--border);
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 20px;
+        }
+
+        .card-header h2 {
+            font-size: 22px;
+            margin-bottom: 5px;
+        }
+
+        .card-header p {
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .section-number {
+            min-width: 45px;
+            height: 45px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+
+            background: #e8f1ff;
+            color: var(--primary);
+
+            font-weight: 700;
+        }
+
+
+        /* =========================
+           FORM
+        ========================== */
+
+        form {
+            padding: 35px;
+        }
+
+        fieldset {
+            border: none;
+        }
+
+        legend {
+            display: none;
+        }
+
+        .form-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 24px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+
+            gap: 8px;
+        }
+
+        .form-group.full {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            font-size: 14px;
+            font-weight: 600;
+
+            color: #323a4c;
+        }
+
+        .required {
+            color: #d93636;
+        }
+
+
+        /* =========================
+           INPUTS
+        ========================== */
+
+        input,
+        select {
+            width: 100%;
+
+            padding: 14px 15px;
+
+            border: 1px solid var(--border);
+            border-radius: 10px;
+
+            background: #fbfcfe;
+
+            color: var(--text);
+
+            font-size: 15px;
+
+            outline: none;
+
+            transition:
+                border-color 0.2s ease,
+                box-shadow 0.2s ease,
+                background 0.2s ease;
+        }
+
+        input::placeholder {
+            color: #a4aab5;
+        }
+
+        input:hover,
+        select:hover {
+            border-color: #bcc6d4;
+        }
+
+        input:focus,
+        select:focus {
+            border-color: var(--primary);
+
+            background: white;
+
+            box-shadow:
+                0 0 0 4px rgba(23, 105, 224, 0.10);
+        }
+
+
+        /* =========================
+           INFORMATION BOX
+        ========================== */
+
+        .info-box {
+            grid-column: 1 / -1;
+
+            display: flex;
+
+            gap: 12px;
+
+            padding: 16px;
+
+            margin-top: 5px;
+
+            border-radius: 11px;
+
+            background: #f0f6ff;
+
+            color: #40506a;
+
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .info-icon {
+            min-width: 24px;
+            height: 24px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+
+            background: var(--primary);
+            color: white;
+
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+
+        /* =========================
+           BOTTOM
+        ========================== */
+
+        .form-footer {
+            margin-top: 35px;
+
+            padding-top: 25px;
+
+            border-top: 1px solid var(--border);
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 20px;
+        }
+
+        .privacy {
+            max-width: 500px;
+
+            color: var(--muted);
+
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        .submit-button {
+            min-width: 170px;
+
+            padding: 14px 25px;
+
+            border: none;
+            border-radius: 10px;
+
+            background: var(--primary);
+
+            color: white;
+
+            font-size: 15px;
+            font-weight: 700;
+
+            cursor: pointer;
+
+            box-shadow:
+                0 10px 25px rgba(23, 105, 224, 0.22);
+
+            transition:
+                background 0.2s ease,
+                transform 0.2s ease,
+                box-shadow 0.2s ease;
+        }
+
+        .submit-button:hover {
+            background: var(--primary-dark);
+
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 14px 30px rgba(23, 105, 224, 0.30);
+        }
+
+        .submit-button:active {
+            transform: scale(0.98);
+        }
+
+
+        /* =========================
+           PROGRESS
+        ========================== */
+
+        .progress {
+            width: 100%;
+
+            height: 4px;
+
+            background: #e7ebf1;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 100%;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #1769e0,
+                    #54a3ff
+                );
+        }
+
+
+        /* =========================
+           RESPONSIVE
+        ========================== */
+
+        @media (max-width: 700px) {
+
+            .topbar {
+                padding: 18px 20px;
+            }
+
+            .step {
+                display: none;
+            }
+
+            .page {
+                padding: 40px 15px 60px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-group.full {
+                grid-column: auto;
+            }
+
+            .card-header {
+                padding: 25px 22px;
+            }
+
+            form {
+                padding: 25px 22px;
+            }
+
+            .form-footer {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .submit-button {
+                width: 100%;
+            }
+
+        }
+
     </style>
 </head>
 
-<body style="background-color: rgb(102, 172, 205);">
-    <form action="http://192.168.0.80/bti-7/index.php" method="post" >
-    <h1 >
-        Formulario
-    </h1>
-    <h3>
-        <fieldset>
-            <legend>Datos Personales</legend>
-            <div>
-                <label> Nombre:</label>
-                <input type="text" ; name="Nombre">
-            </div>
-           
-            <label> Apellido:</label>
-            <input type="text" ; name="Apellido">
-            <div>
-                <div>
-                    <label> Nacionalidad:</label>
-               <input type="text" ; name="Nacionalidad">
-               </div>
-                <div>
-                <label> Fecha de nacimiento:</label>
-            <input type="date" name="Fecha de nacimiento">
-        </div>
-        <div>
-                <label> Direccion:</label>
-            <input type="text" ; name="Direccion">
-        </div>
-            
-            <div>
-                 <label> Telefono:</label>
-            <input type="text" ; name="Telefono">
-            </div>
-           <div>
-                <label> Sexo:</label>
-            <select id="Sexo" ; name="Sexo">
-                <option value="Ópciones"> Opciones</option>
-                <option value="Hombre"> Hombre</option>
-                <option value="Mujer"> Mujer</option>
-            </select>
-            <div>
-                <label> Estado Civil</label>
-            <select id="Estado" ; name="Estado">
-                <option value="Ópciones"> Opciones</option>
-                <option value="Casado/a"> Casado/a</option>
-                <option value="Soltero/a"> Soltero/a</option>
-                <option value="Divorciado/a"> Divorciado/a</option>
-                </select>
-             </div>
-        </div>
-            
-            
-        </fieldset>
-    </h3>
-    <input type="hidden"  >
-    <input type="submit" value="Enviar" id="Enviar">
-   
 
-</form>
+<body>
 
-</body>  
+    <!-- HEADER -->
+
+    <header class="topbar">
+
+        <div class="brand">
+
+            <div class="brand-icon">
+                I
+            </div>
+
+            <span>
+                Portal de Inscripción
+            </span>
+
+        </div>
+
+        <span class="step">
+            Formulario de registro
+        </span>
+
+    </header>
+
+
+    <!-- PROGRESS -->
+
+    <div class="progress">
+
+        <div class="progress-bar"></div>
+
+    </div>
+
+
+    <!-- PAGE -->
+
+    <main class="page">
+
+        <div class="form-container">
+
+
+            <!-- INTRO -->
+
+            <section class="intro">
+
+                <span class="intro-badge">
+                    INSCRIPCIÓN
+                </span>
+
+                <h1>
+                    Completa tus datos
+                </h1>
+
+                <p>
+                    Ingresa tu información personal para completar
+                    el proceso de inscripción. Revisa tus datos antes
+                    de enviar el formulario.
+                </p>
+
+            </section>
+
+
+
+            <!-- FORM CARD -->
+
+            <section class="form-card">
+
+
+                <div class="card-header">
+
+                    <div>
+
+                        <h2>
+                            Datos personales
+                        </h2>
+
+                        <p>
+                            Los campos marcados con * son obligatorios.
+                        </p>
+
+                    </div>
+
+                    <div class="section-number">
+                        01
+                    </div>
+
+                </div>
+
+
+
+                <form
+                    action="http://192.168.0.80/bti-7/index.php"
+                    method="post"
+                >
+
+                    <fieldset>
+
+                        <legend>
+                            Datos personales
+                        </legend>
+
+
+                        <div class="form-grid">
+
+
+                            <!-- NOMBRE -->
+
+                            <div class="form-group">
+
+                                <label for="nombre">
+                                    Nombre
+                                    <span class="required">*</span>
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="nombre"
+                                    name="Nombre"
+                                    placeholder="Ej. Nicolás"
+                                    autocomplete="given-name"
+                                    required
+                                >
+
+                            </div>
+
+
+
+                            <!-- APELLIDO -->
+
+                            <div class="form-group">
+
+                                <label for="apellido">
+                                    Apellido
+                                    <span class="required">*</span>
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="apellido"
+                                    name="Apellido"
+                                    placeholder="Ej. Fernández"
+                                    autocomplete="family-name"
+                                    required
+                                >
+
+                            </div>
+
+
+
+                            <!-- NACIONALIDAD -->
+
+                            <div class="form-group">
+
+                                <label for="nacionalidad">
+                                    Nacionalidad
+                                    <span class="required">*</span>
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="nacionalidad"
+                                    name="Nacionalidad"
+                                    placeholder="Ej. Paraguaya"
+                                    required
+                                >
+
+                            </div>
+
+
+
+                            <!-- NACIMIENTO -->
+
+                            <div class="form-group">
+
+                                <label for="fecha">
+                                    Fecha de nacimiento
+                                    <span class="required">*</span>
+                                </label>
+
+                                <input
+                                    type="date"
+                                    id="fecha"
+                                    name="Fecha de nacimiento"
+                                    autocomplete="bday"
+                                    required
+                                >
+
+                            </div>
+
+
+
+                            <!-- DIRECCIÓN -->
+
+                            <div class="form-group full">
+
+                                <label for="direccion">
+                                    Dirección
+                                    <span class="required">*</span>
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="direccion"
+                                    name="Direccion"
+                                    placeholder="Ej. Av. Principal 123"
+                                    autocomplete="street-address"
+                                    required
+                                >
+
+                            </div>
+
+
+
+                            <!-- TELÉFONO -->
+
+                            <div class="form-group">
+
+                                <label for="telefono">
+                                    Teléfono
+                                    <span class="required">*</span>
+                                </label>
+
+                                <input
+                                    type="tel"
+                                    id="telefono"
+                                    name="Telefono"
+                                    placeholder="+595 981 123 456"
+                                    autocomplete="tel"
+                                    required
+                                >
+
+                            </div>
+
+
+
+                            <!-- SEXO -->
+
+                            <div class="form-group">
+
+                                <label for="sexo">
+                                    Sexo
+                                    <span class="required">*</span>
+                                </label>
+
+                                <select
+                                    id="sexo"
+                                    name="Sexo"
+                                    required
+                                >
+
+                                    <option value="" selected disabled>
+                                        Selecciona una opción
+                                    </option>
+
+                                    <option value="Hombre">
+                                        Hombre
+                                    </option>
+
+                                    <option value="Mujer">
+                                        Mujer
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+
+
+                            <!-- ESTADO CIVIL -->
+
+                            <div class="form-group">
+
+                                <label for="estado">
+                                    Estado civil
+                                    <span class="required">*</span>
+                                </label>
+
+                                <select
+                                    id="estado"
+                                    name="Estado"
+                                    required
+                                >
+
+                                    <option value="" selected disabled>
+                                        Selecciona una opción
+                                    </option>
+
+                                    <option value="Soltero/a">
+                                        Soltero/a
+                                    </option>
+
+                                    <option value="Casado/a">
+                                        Casado/a
+                                    </option>
+
+                                    <option value="Divorciado/a">
+                                        Divorciado/a
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+
+
+                            <!-- INFO -->
+
+                            <div class="info-box">
+
+                                <div class="info-icon">
+                                    i
+                                </div>
+
+                                <div>
+                                    Asegúrate de que los datos ingresados sean
+                                    correctos antes de enviar el formulario.
+                                    Esta información será utilizada para tu
+                                    registro.
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+
+
+                        <!-- FOOTER -->
+
+                        <div class="form-footer">
+
+                            <p class="privacy">
+                                Al enviar este formulario confirmas que los
+                                datos proporcionados son correctos.
+                            </p>
+
+                            <button
+                                type="submit"
+                                class="submit-button"
+                            >
+                                Enviar inscripción →
+                            </button>
+
+                        </div>
+
+
+                    </fieldset>
+
+                </form>
+
+
+            </section>
+
+
+        </div>
+
+    </main>
+
+</body>
 
 </html>
